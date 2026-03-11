@@ -29,6 +29,10 @@ RUN cd /var/www/html && composer install --no-interaction --optimize-autoloader 
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 RUN chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
 
+# نسخ ملف البيئة وتوليد المفتاح
+RUN cp /var/www/html/.env.example /var/www/html/.env || true
+RUN cd /var/www/html && php artisan key:generate
+
 # ضبط Document Root لـ Apache
 ENV APACHE_DOCUMENT_ROOT /var/www/html/public
 RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
