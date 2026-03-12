@@ -7,6 +7,7 @@ use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Models\Order;
 
 class User extends Authenticatable
 {
@@ -19,9 +20,13 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
-        'name',
+        'first_name',
+        'father_name',
+        'last_name',
         'email',
+        'phone',
         'password',
+        'is_admin',
     ];
 
     /**
@@ -44,6 +49,27 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'is_admin' => 'boolean',
         ];
     }
+
+    /*
+     * relations
+     */
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+
+    public function chats()
+    {
+        return $this->hasMany(Chat::class);
+    }
+
+    // accessor for full name
+    public function getFullNameAttribute()
+    {
+        return trim($this->first_name . ' ' . $this->father_name . ' ' . $this->last_name);
+    }
+
 }

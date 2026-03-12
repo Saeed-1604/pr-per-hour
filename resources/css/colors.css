@@ -1,0 +1,18 @@
+/* PR Per Hour - Unified Styling */
+
+:root {
+    --gold-primary: #C4860B;
+    --gold-dark: #8B5D00;
+    --gold-light: #D4A574;
+    --brown-accent: #7A4600;
+    --white: #ffffff;
+    --dark-text: #333333;
+    --light-text: #666666;
+    --bg-light: #f4f4f4;
+}
+
+/* Global color variables for existing pages */
+* {
+    --primary-gold: #C4860B;
+    --secondary-gold: #8B5D00;
+}
